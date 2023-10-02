@@ -25,6 +25,14 @@ class MainActivity : AppCompatActivity() {
     private val right = mBitmap.width - left
     private val bottom = mBitmap.height.toFloat() - 50F
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.imageView.setImageBitmap(mBitmap)
+    }
+
     private fun showFace() {
         val face = RectF(left, top, right, bottom)
 
@@ -35,11 +43,13 @@ class MainActivity : AppCompatActivity() {
         mCanvas.drawArc(face, 270F, 180F, false, mPaint)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    private fun showEyes() {
+        mPaint.color = ResourcesCompat.getColor(resources, R.color.black, null)
+        mCanvas.drawCircle(halfOfWidth - 100F, halfOfHeight - 10F, 50F, mPaint)
+        mCanvas.drawCircle(halfOfWidth + 100F, halfOfHeight - 10F, 50F, mPaint)
 
-        binding.imageView.setImageBitmap(mBitmap)
+        mPaint.color = ResourcesCompat.getColor(resources, R.color.white, null)
+        mCanvas.drawCircle(halfOfWidth - 120F, halfOfHeight - 20F, 15F, mPaint)
+        mCanvas.drawCircle(halfOfWidth + 80F, halfOfHeight - 20F, 15F, mPaint)
     }
 }
