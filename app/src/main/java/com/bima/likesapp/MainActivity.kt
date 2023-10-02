@@ -31,6 +31,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.imageView.setImageBitmap(mBitmap)
+
+        binding.like.setOnClickListener {
+            showFace()
+            showMouth(true)
+            showEyes()
+        }
+
+        binding.dislike.setOnClickListener {
+            showFace()
+            showMouth(false)
+            showEyes()
+        }
     }
 
     private fun showFace() {
