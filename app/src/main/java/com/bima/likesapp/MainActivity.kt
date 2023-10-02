@@ -3,6 +3,7 @@ package com.bima.likesapp
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.Rect
 import android.graphics.RectF
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -24,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     private val top = 250F
     private val right = mBitmap.width - left
     private val bottom = mBitmap.height.toFloat() - 50F
+
+    private val message = "Apakah kamu suka bermain?"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,5 +89,19 @@ class MainActivity : AppCompatActivity() {
                 mCanvas.drawArc(mouth, 0F, -180F, false, mPaint)
             }
         }
+    }
+
+    private fun showText() {
+        val mPaintText = Paint(Paint.FAKE_BOLD_TEXT_FLAG).apply {
+            textSize = 50F
+            color = ResourcesCompat.getColor(resources, R.color.black, null)
+        }
+
+        val mBounds = Rect()
+        mPaintText.getTextBounds(message, 0, message.length, mBounds)
+
+        val x: Float = halfOfWidth - mBounds.centerX()
+        val y = 50F
+        mCanvas.drawText(message, x, y, mPaintText)
     }
 }
